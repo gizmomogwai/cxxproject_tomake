@@ -8,13 +8,36 @@ end
 
 task :default => :package
 
-SPEC_PATTERN ='spec/**/*_spec.rb'
-
 require 'rspec/core/rake_task'
 
-desc "Run examples"
+desc "Run unittests"
 RSpec::Core::RakeTask.new() do |t|
-  t.pattern = SPEC_PATTERN
+  t.pattern = 'spec/**/*_spec.rb'
+#  if ENV['BUILD_SERVER']
+#    t.rspec_opts = '-r ./junit.rb -f JUnit -o build/test_details.xml'
+#  end
+end
+
+def gems
+  ['cxxproject', 'cxx', 'cxxproject_tomake']
+end
+
+desc 'prepare acceptance tests'
+task :prepare_accept do
+  gems.each do |gem|
+    cd "../#{gem}" do
+      sh 'rm -rf pkg'
+      sh 'rake package'
+    end
+  end
+  gems.each do |gem|
+    sh "gem install ../#{gem}/pkg/*.gem"
+  end
+end
+
+desc 'run acceptance tests'
+RSpec::Core::RakeTask.new(:accept) do |t|
+  t.pattern = 'accept/**/*_spec.rb'
 #  if ENV['BUILD_SERVER']
 #    t.rspec_opts = '-r ./junit.rb -f JUnit -o build/test_details.xml'
 #  end
