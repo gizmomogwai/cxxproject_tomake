@@ -1,5 +1,5 @@
-require "cxxproject_stats/version"
+require "cxxproject_tomake/version"
 
-module CxxprojectStats
+module CxxprojectTomake
   # Your code goes here...
 end

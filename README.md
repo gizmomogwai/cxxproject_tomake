@@ -1,12 +1,13 @@
-# CxxprojectStats
+# CxxprojectTomake
+Plugin for cxxproject that creates a simple make.sh script for building the project.
 
-TODO: Write a gem description
+TODO: mkdirs for the output folders are missing.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'cxxproject_stats'
+    gem 'cxxproject_tomake'
 
 And then execute:
 
@@ -14,11 +15,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install cxxproject_stats
-
-## Usage
-
-TODO: Write usage instructions here
+    $ gem install cxxproject_tomake
 
 ## Contributing
 
